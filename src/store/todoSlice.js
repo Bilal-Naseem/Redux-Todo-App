@@ -3,12 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const todoSlice = createSlice({
     name:'TodoSlice',
     initialState: {
-        counter:10,
         TodoList:[
             {
                 id: 0,
                 description: 'Complete PIAIC BC Assignments',
-                status: false
+                status: true
             },
             {
                 id: 1,
@@ -18,7 +17,7 @@ const todoSlice = createSlice({
             {
                 id: 2,
                 description: 'Prepare for Finals',
-                status: true
+                status: false
             }
         ]
     },
