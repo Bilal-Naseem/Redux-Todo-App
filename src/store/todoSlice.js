@@ -25,7 +25,7 @@ const todoSlice = createSlice({
         addTodo: (state,action)=>{
             state.TodoList.push({
                 id: state.TodoList.length,
-                description: action.payload.description,
+                description: action.payload,
                 status: false
             })
         },
