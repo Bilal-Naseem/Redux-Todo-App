@@ -67,7 +67,8 @@ function TodoList() {
     })
     const [ModalData,setModalData] = useState({
         id: 0,
-        description: 'None'
+        description: 'None',
+        status: false
     })
     const dispatch = useDispatch();
     return (
@@ -86,16 +87,19 @@ function TodoList() {
                     <div className="modal-content modalBack">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Edit Todo Item</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <button type="button" id="CloseModal"className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-body mb-5">
-                            <form onSubmit={(e)=>{
-                                e.preventDefault();
-                                dispatch(editTodo(ModalData))
-                            }} 
-                            className='form-transaction mt-5'>
+                            <form
+                                onSubmit={(e)=>{
+                                    e.preventDefault();
+                                    dispatch(editTodo(ModalData))
+                                    document.getElementById('CloseModal').click();
+                                }}
+                                className='form-transaction mt-5'
+                            >
                                 <div className="row"  style={{justifyContent:'center'}}>
                                     <div className="col-10">
                                         <div className="input-group form-fields-wrapper">
@@ -111,7 +115,8 @@ function TodoList() {
                                                 value={ModalData.description}
                                                 onChange={(e)=>setModalData({
                                                     id: ModalData.id,
-                                                    description: e.target.value
+                                                    description: e.target.value,
+                                                    status: ModalData.status
                                                 })}
                                             />
                                         </div>
