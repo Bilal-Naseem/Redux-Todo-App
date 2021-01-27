@@ -70,17 +70,67 @@ function TodoList() {
         description: 'None',
         status: false
     })
+    const [Filter,setFilter] = useState('ALL');
+
     const dispatch = useDispatch();
     return (
         <>
-            <div className='row'>
-                <div className="col align-self-center">
-                    <h3>Todo Items</h3>
+            <div className="row justify-content-center mb-3">
+                <div className="input-group col-3" 
+                    onClick={()=>{
+                        document.getElementById('AllButton').click();
+                        if(document.getElementById('CompletedList').classList.contains('d-none'))
+                        {
+                            document.getElementById('CompletedList').classList.add('d-block');
+                            document.getElementById('CompletedList').classList.remove('d-none');
+                        }
+                }}>
+                    <div className="input-group-prepend">
+                        <div className="input-group-text bg-secondary" >
+                            <input id='AllButton' type="radio" name="ListFilter" checked={Filter === 'ALL'} onClick={()=>setFilter('ALL')} value='ALL'/>
+                        </div>
+                    </div>
+                    <p className="form-control text-white bg-transparent" >All</p>
+                </div>
+                <div className="input-group col-3" onClick={()=>{
+                    document.getElementById('ActiveButton').click();
+                    document.getElementById('CompletedList').classList.remove('d-block');
+                    document.getElementById('CompletedList').classList.add('d-none');
+
+                }}>
+                    <div className="input-group-prepend">
+                        <div className="input-group-text bg-secondary" >
+                            <input type="radio" id='ActiveButton' name="ListFilter" checked={Filter === 'ACTIVE'} value='ACTIVE' onClick={()=>setFilter('ACTIVE')}/>
+                        </div>
+                    </div>
+                    <p className="form-control text-white bg-transparent" >Active</p>
+                </div>
+                <div className="input-group col-3" onClick={()=>{
+                    document.getElementById('CompletedButton').click();
+                    if(document.getElementById('CompletedList').classList.contains('d-none'))
+                    {
+                        document.getElementById('CompletedList').classList.add('d-block');
+                        document.getElementById('CompletedList').classList.remove('d-none');
+                    }
+                }}>
+                    <div className="input-group-prepend">
+                        <div className="input-group-text bg-secondary" >
+                            <input type="radio" id='CompletedButton' name="ListFilter" checked={Filter === 'COMPLETED'} value='COMPLETED' onClick={()=>setFilter('COMPLETED')}/>
+                        </div>
+                    </div>
+                    <p className="form-control text-white bg-transparent">Completed</p>
                 </div>
             </div>
-            {
-                TodoList.filter((e)=>(e.status === false)).map(TodoItem => (<GetListItem TodoItem={TodoItem} key={TodoItem.id} dispatch={dispatch} setModal={setModalData}/>))
-            }
+            <div className={Filter !== 'COMPLETED' ? 'd-block' : 'd-none'} id='ActiveTodo'>
+                <div className='row'>
+                    <div className="col align-self-center">
+                        <h3>Todo Items</h3>
+                    </div>
+                </div>
+                {
+                    TodoList.filter((e)=>(e.status === false)).map(TodoItem => (<GetListItem TodoItem={TodoItem} key={TodoItem.id} dispatch={dispatch} setModal={setModalData}/>))
+                }
+            </div>
              {/* Modal */}
              <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-lg">

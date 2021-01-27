@@ -4,7 +4,7 @@
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 61%, rgba(6,79,171,1) 100%);
   min-height: 100vh;
   color: white;
-  padding-top:5%;
+  padding-top:2%;
 }
 .form-transaction{
   border: 1.5px solid rgb(255, 255, 255);

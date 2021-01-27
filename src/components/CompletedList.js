@@ -56,6 +56,7 @@ function CompletedList() {
     const dispatch = useDispatch();
     return (
         <>
+        <div className='d-block' id='CompletedList'>
             <div className='row'>
                 <div className="col align-self-center">
                     <h3>Completed</h3>
@@ -64,6 +65,7 @@ function CompletedList() {
             {
                 TodoList.filter((e)=>(e.status === true)).map(TodoItem => (<GetListItem TodoItem={TodoItem} key={TodoItem.id} dispatch={dispatch}/>))
             }
+        </div>
         </>
     );
 }
